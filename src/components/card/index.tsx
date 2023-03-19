@@ -1,20 +1,33 @@
 import Image from "next/image";
 import coconut from "../../../public/coconut.png";
-export default function Card() {
+import { iCardSingleProduct } from "@/context/products.context";
+
+export default function Card({
+  discount,
+  imageUrl,
+  isAvailable,
+  name,
+  sellingPrice,
+  description,
+}: iCardSingleProduct) {
   return (
-    <div className="shadow-lg rounded-2xl m-5 p-5">
+    <div className="shadow-lg mobile:w-auto max-w-md rounded-2xl m-5 p-5">
       <>
         <Image
-          src={coconut}
-          style={{ objectFit: "contain", height: "250px" }}
+          src={imageUrl}
+          width={100}
+          height={100}
+          style={{ objectFit: "contain", width: "100%", height: "250px" }}
           alt="Home"
         />
         <div className="">
-          <span className="card-title">100% Cow Milk</span>
+          <span className="card-title">{name}</span>
           <br />
-          <span className="card-qty font-bold  text-green-800">₹ 60/L</span>
+          <span className="card-qty font-bold  text-green-800">
+            ₹ ${sellingPrice}
+          </span>
           <span className="card-qty line-through text-sm text-red-500">
-            ₹ 70/L
+            ₹ ${sellingPrice - discount}
           </span>
           <br />
 
